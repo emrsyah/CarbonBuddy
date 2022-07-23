@@ -64,7 +64,7 @@ const Flight = () => {
             >
               No, i dont flight today
             </button>
-            <p className="my-4 text-gray-400">
+            <p className="my-2 text-gray-400">
               Or if you flight more than once today
             </p>
             <div className="flex flex-col w-full gap-2">

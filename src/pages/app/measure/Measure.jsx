@@ -46,7 +46,7 @@ function Measure() {
             onClick={() => navigate("transport")}
             variants={buttonVariants}
             whileHover="hover"
-            className="py-[10px] px-8 items-center flex gap-[10px] font-medium text-white border-2 border-white rounded-full shadow-sm shadow-gray-500"
+            className="py-[10px] px-10 text-lg items-center flex gap-[10px] font-medium text-white border-2 border-white rounded-full shadow-sm shadow-gray-500"
           >
             <p>Lets Find Out</p>
             <span className="text-2xl">🔍</span>

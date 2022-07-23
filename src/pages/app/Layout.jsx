@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { userAtom } from "../../atoms/userAtom";
 import { auth } from "../../firebase";
@@ -11,6 +11,7 @@ import NavApp from "../../components/NavApp";
 function Layout() {
   const setUser = useSetRecoilState(userAtom);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate()
 
   useEffect(() => {
     setLoading(true);

@@ -25,7 +25,7 @@ function Tracker() {
       <Helmet>
         <title>Track Habit | Carbon Buddy</title>
       </Helmet>
-      <div className="my-8 max-w-6xl mx-auto">
+      <div className="my-8 max-w-6xl mx-6 xl:mx-20 2xl:mx-auto">
         <PageNavigation />
 
         {/* CHALLENGES GENERATOR */}

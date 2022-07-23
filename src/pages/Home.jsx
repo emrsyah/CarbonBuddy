@@ -73,14 +73,17 @@ function Home() {
         <div className="flex items-center gap-6 justify-center mt-6">
           <div className="flex items-center text-sm text-gray-400 gap-2">
             <h6 className="font-medium hover:text-teal-300 cursor-pointer">
-              Environment Habit Tracker |{" "}
+              Environment Habit Tracker
             </h6>
+            <h6> | </h6>
             <h6 className="font-medium hover:text-teal-300 cursor-pointer">
-              Carbon Footprint Measurement |{" "}
+              Carbon Footprint Measurement
             </h6>
+            <h6> | </h6>
             <h6 className="font-medium hover:text-teal-300 cursor-pointer">
-              Climate FunFact |{" "}
+              Climate FunFact
             </h6>
+            <h6> | </h6>
             <h6 className="font-medium hover:text-teal-300 cursor-pointer">
               High Low Games
             </h6>

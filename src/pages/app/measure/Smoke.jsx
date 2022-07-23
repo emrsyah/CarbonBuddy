@@ -64,7 +64,7 @@ const Smoke = () => {
             >
               No, i dont smoke
             </button>
-            <p className="my-4 text-gray-400">
+            <p className="my-2 text-gray-400">
               Or if you smoke more than once today
             </p>
             <div className="flex flex-col w-full gap-2">

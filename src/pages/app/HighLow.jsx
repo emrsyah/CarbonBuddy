@@ -9,6 +9,7 @@ function HighLow() {
   const [first, setFirst] = useState(null);
   const [second, setSecond] = useState(null);
   const [reveal, setReveal] = useState(false);
+//   const [choosen]
   const max = 22;
 
   const getRandomNumber = () => {
@@ -62,7 +63,7 @@ function HighLow() {
       <Helmet>
         <title>Higher Lower | Carbon Buddy</title>
       </Helmet>
-      <div className="my-8 max-w-6xl mx-10 xl:mx-20 2xl:mx-auto">
+      <div className="my-8 max-w-6xl mx-6 xl:mx-20 2xl:mx-auto">
         <PageNavigation />
         <div className="grid grid-cols-11 gap-4 my-10">
           <button

@@ -118,7 +118,7 @@ const Transport = () => {
             </button> */}
             <button
               onClick={() => navigate("/app/measure/flight", {replace: true})}
-              className="bg-blue-500 w-full font-medium py-[10px] px-7 rounded text-white"
+              className="bg-blue-500 hover:bg-blue-600 w-full font-medium py-[10px] px-7 rounded text-white"
             >
               Continue
             </button>
