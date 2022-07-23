@@ -6,6 +6,7 @@ import { userAtom } from "../../atoms/userAtom";
 import { auth } from "../../firebase";
 import lottieJson from "../../assets/loading.json";
 import Lottie from "lottie-web";
+import NavApp from "../../components/NavApp";
 
 function Layout() {
   const setUser = useSetRecoilState(userAtom);
@@ -57,10 +58,12 @@ function Layout() {
     );
   } else {
     return (
-      <main>
-        <h1>Layout</h1>
-        <Outlet />
-      </main>
+      <>
+        <NavApp />
+        <main>
+          <Outlet />
+        </main>
+      </>
     );
   }
 }
