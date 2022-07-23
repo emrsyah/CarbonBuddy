@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "../../../components/ProgressBar";
+import { climatiqAtom } from "../../../atoms/climatiqAtom";
+import {useRecoilState} from 'recoil'
 
 const containerVariants = {
   hidden: {
@@ -28,7 +30,25 @@ const containerVariants = {
 };
 
 const Transport = () => {
+  const [data, setData] = useRecoilState(climatiqAtom);
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const name = (e.target.name.split(' ')[1])
+    const uid = (e.target.name.split(' ')[0])
+    setData((prevState) => ({
+      ...prevState,
+      [name]: {
+        emission_factor: {
+          uuid: uid,
+        },
+        parameters: {
+          distance: parseInt(e.target.value),
+        },
+      },
+    }));
+  };
+
   return (
     <div className="overflow-hidden">
       <ProgressBar completed={0} />
@@ -60,7 +80,7 @@ const Transport = () => {
             </div>
             <div className="flex flex-col">
               <h5 className="text-xl">
-                Bike🚲 <span className="text-sm">(km)</span>
+                Bicycle🚲 <span className="text-sm">(km)</span>
               </h5>
               <input
                 min={0}
@@ -73,6 +93,9 @@ const Transport = () => {
                 Motorcycle🛵 <span className="text-sm">(km)</span>
               </h5>
               <input
+                onChange={handleChange}
+                value={data?.motorcycle?.parameters?.distance || 0}
+                name="91fc1718-88a1-4793-98c3-54ec3e6e63f4 motorcycle"
                 min={0}
                 type="number"
                 className="bg-gray-900 w-fit p-1 border-b-[1px] outline-none"
@@ -84,7 +107,10 @@ const Transport = () => {
               </h5>
               <input
                 min={0}
+                onChange={handleChange}
                 type="number"
+                value={data?.bus?.parameters?.distance| 0}
+                name="bb937415-ceb6-4cde-b465-3ff3285fffae bus"
                 className="bg-gray-900 w-fit p-1 border-b-[1px] outline-none"
               />
             </div>
@@ -95,6 +121,9 @@ const Transport = () => {
               <input
                 min={0}
                 type="number"
+                value={data?.car?.parameters?.distance| 0}
+                onChange={handleChange}
+                name="a94fb338-b9c4-419d-9803-af2f7ae03142 car"
                 className="bg-gray-900 w-fit p-1 border-b-[1px] outline-none"
               />
             </div>
@@ -105,6 +134,9 @@ const Transport = () => {
               <input
                 min={0}
                 type="number"
+                value={data?.train?.parameters?.distance || 0}
+                onChange={handleChange}
+                name="b1575ee1-87c9-4560-a09d-e423627c8548 train"
                 className="bg-gray-900 w-fit p-1 border-b-[1px] outline-none"
               />
             </div>
@@ -117,7 +149,7 @@ const Transport = () => {
               Previous
             </button> */}
             <button
-              onClick={() => navigate("/app/measure/flight", {replace: true})}
+              onClick={() => navigate("/app/measure/flight", { replace: true })}
               className="bg-blue-500 hover:bg-blue-600 w-full font-medium py-[10px] px-7 rounded text-white"
             >
               Continue

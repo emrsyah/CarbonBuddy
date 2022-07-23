@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import ProgressBar from "../../../components/ProgressBar";
+import { useSetRecoilState } from "recoil";
+import { climatiqAtom } from "../../../atoms/climatiqAtom";
+
 
 const containerVariants = {
   hidden: {
@@ -30,9 +33,27 @@ const containerVariants = {
 const Holiday = () => {
   const navigate = useNavigate();
   const [completed, setCompleted] = useState(70);
+  const setData = useSetRecoilState(climatiqAtom);
+
   setTimeout(() => {
     setCompleted(85);
   }, 50);
+
+  const clickHandler = () => {
+    setData((prevState) => ({
+      ...prevState,
+      hotel: {
+        emission_factor: {
+          uuid: "abebbfea-3ed0-451e-9306-256fad320d56",
+        },
+        parameters: {
+          number: 1,
+        },
+      },
+    }));
+    navigate("/app/measure/result", { replace: true });
+  };
+
   return (
     <div className="overflow-hidden">
       <ProgressBar completed={completed} />
@@ -53,13 +74,13 @@ const Holiday = () => {
           </div>
           <div className="flex flex-col-reverse items-center gap-4 justify-between mt-10">
             <button
-              onClick={() => navigate("/app/measure/result", {replace: true})}
+              onClick={() => navigate("/app/measure/result", { replace: true })}
               className="bg-gray-800 py-[10px] w-full px-7 rounded text-gray-200"
             >
               No, i dont
             </button>
             <button
-              onClick={() => navigate("/app/measure/result", {replace: true})}
+              onClick={() => clickHandler()}
               className="bg-blue-500 hover:bg-blue-600 font-medium w-full py-[10px] px-7 rounded text-white"
             >
               Yes, i am staying on hotel today

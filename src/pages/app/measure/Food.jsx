@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "../../../components/ProgressBar";
+import { climatiqAtom } from "../../../atoms/climatiqAtom";
+import { useRecoilState } from "recoil";
 
 const containerVariants = {
   hidden: {
@@ -29,10 +31,31 @@ const containerVariants = {
 
 const Food = () => {
   const navigate = useNavigate();
+  const [data, setData] = useRecoilState(climatiqAtom);
   const [completed, setCompleted] = useState(40);
+
+  const handleChange = (e) => {
+    const name = e.target.name.split(" ")[1];
+    const uid = e.target.name.split(" ")[0];
+    const harga = e.target.name.split(" ")[2];
+    setData((prevState) => ({
+      ...prevState,
+      [name]: {
+        emission_factor: {
+          uuid: uid,
+        },
+        parameters: {
+          money: (parseInt(e.target.value) * parseInt(harga)) / 15000,
+        },
+        amount: parseInt(e.target.value)
+      },
+    }));
+  };
+
   setTimeout(() => {
     setCompleted(55);
   }, 50);
+
   return (
     <div className="overflow-hidden">
       <ProgressBar completed={completed} />
@@ -58,6 +81,9 @@ const Food = () => {
                 Fish Products🐠<span className="text-sm"> (times)</span>
               </h5>
               <input
+                onChange={handleChange}
+                value={data?.fish?.amount || 0}
+                name="04153823-6b76-4278-8ba6-f40bc02f9057 fish 25000"
                 type="number"
                 min={0}
                 className="bg-gray-900 w-fit p-1 border-b-[1px] outline-none"
@@ -68,6 +94,9 @@ const Food = () => {
                 Beef🥩 <span className="text-sm">(times)</span>
               </h5>
               <input
+                onChange={handleChange}
+                value={data?.beef?.amount || 0}
+                name="b5e96999-a595-4560-8d45-be9e22af4fe8 beef 32000"
                 type="number"
                 min={0}
                 className="bg-gray-900 w-fit p-1 border-b-[1px] outline-none"
@@ -78,6 +107,9 @@ const Food = () => {
                 Poultry Products🦆 <span className="text-sm">(times)</span>
               </h5>
               <input
+                onChange={handleChange}
+                value={data?.poultry?.amount || 0}
+                name="6432cf0f-2639-46af-967d-74c319d3b697 poultry 20000"
                 type="number"
                 min={0}
                 className="bg-gray-900 w-fit p-1 border-b-[1px] outline-none"
@@ -88,6 +120,9 @@ const Food = () => {
                 Pork🥓 <span className="text-sm">(times)</span>
               </h5>
               <input
+                onChange={handleChange}
+                value={data?.pork?.amount || 0}
+                name="5ccf5c23-0404-4208-a933-1bb667e25732 pork 48000"
                 type="number"
                 min={0}
                 className="bg-gray-900 w-fit p-1 border-b-[1px] outline-none"
@@ -95,9 +130,12 @@ const Food = () => {
             </div>
             <div className="flex flex-col">
               <h5 className="text-lg">
-                Dairy Products🥛 <span className="text-sm">(bottle)</span>
+                Milk Products🥛 <span className="text-sm">(bottle)</span>
               </h5>
               <input
+                onChange={handleChange}
+                value={data?.dairy?.amount || 0}
+                name="112b3305-56d5-42f9-8561-06113045f9eb dairy 12000"
                 type="number"
                 min={0}
                 className="bg-gray-900 w-fit p-1 border-b-[1px] outline-none"
@@ -108,6 +146,9 @@ const Food = () => {
                 Regular Water <span className="text-sm">(bottle)</span>
               </h5>
               <input
+                onChange={handleChange}
+                value={data?.water?.amount || 0}
+                name="9334fce2-b509-4368-b26c-459be987e153 water 8000"
                 type="number"
                 min={0}
                 className="bg-gray-900 w-fit p-1 border-b-[1px] outline-none"
@@ -122,7 +163,7 @@ const Food = () => {
               Previous
             </button> */}
             <button
-              onClick={() => navigate("/app/measure/smoke", {replace: true})}
+              onClick={() => navigate("/app/measure/smoke", { replace: true })}
               className="bg-blue-500 hover:bg-blue-600 w-full font-medium py-[10px] px-7 rounded text-white"
             >
               Continue

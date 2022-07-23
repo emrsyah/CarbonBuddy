@@ -23,7 +23,7 @@ function Measure() {
   const setClimatiqData = useSetRecoilState(climatiqAtom);
 
   useEffect(() => {
-    setClimatiqData([]);
+    setClimatiqData({});
   }, []);
 
   return (

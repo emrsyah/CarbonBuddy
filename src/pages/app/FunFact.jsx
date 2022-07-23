@@ -22,9 +22,9 @@ function FunFact() {
     }
   }, []);
 
-  const clickHandler = () =>{
-    getData()
-  }
+  const clickHandler = () => {
+    getData();
+  };
 
   return (
     <>
@@ -35,14 +35,21 @@ function FunFact() {
         <PageNavigation />
         <div className="my-24 flex flex-col gap-16">
           <h3 className="text-5xl leading-normal relative">
-            <span className="text-6xl -top-4 -left-7 rotate-12 absolute">
-              "
-            </span>
-            {fact?.Fact ? fact.Fact : "Getting Some Facts For You😴😴"}"
+            {fact?.Fact ? (
+              <>
+                <span className="text-6xl -top-[10px] -left-7 rotate-12 absolute">
+                  "
+                </span>
+                {fact.Fact}"
+              </>
+            ) : (
+              <>Getting Some Facts For You😴😴</>
+            )}
           </h3>
           <button
-          onClick={()=>clickHandler()}
-          className="text-xl py-3 px-10 font-medium bg-blue-500 hover:bg-blue-600 rounded">
+            onClick={() => clickHandler()}
+            className="text-xl py-3 px-10 font-medium bg-blue-500 hover:bg-blue-600 rounded"
+          >
             More Fact Please 😮
           </button>
         </div>
