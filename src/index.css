@@ -21,3 +21,7 @@ body{
   background-color: rgb(17, 24, 39);
   color: white;
 }
+
+/* .grid-cols-14{
+  grid-template-columns: (14, minmax(0, 1fr));
+} */

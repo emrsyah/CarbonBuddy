@@ -1,12 +1,18 @@
-import React from 'react'
-import PageNavigation from '../../components/PageNavigation'
+import React from "react";
+import { Helmet } from "react-helmet";
+import PageNavigation from "../../components/PageNavigation";
 
 function FunFact() {
   return (
-    <div className='my-8 max-w-6xl mx-auto'>
+    <>
+      <Helmet>
+        <title>Fun Facts | Carbon Buddy</title>
+      </Helmet>
+      <div className="my-8 max-w-6xl mx-auto">
         <PageNavigation />
-    </div>
-  )
+      </div>
+    </>
+  );
 }
 
-export default FunFact
+export default FunFact;
