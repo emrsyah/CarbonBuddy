@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.6",
     "dayjs": "^1.11.4",
     "firebase": "^9.9.1",
     "framer-motion": "^6.5.1",
