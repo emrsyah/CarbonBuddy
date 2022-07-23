@@ -3,8 +3,14 @@ import { Helmet } from "react-helmet";
 import PageNavigation from "../../components/PageNavigation";
 import { Icon } from "@iconify/react";
 import dayjs from "dayjs";
+import Challenges from "../../components/Challenges";
 
 const data = [1, 2, 3, 4, 5, 6, 7];
+const challenges = [
+  "reduce water use for the next 7 days",
+  "drink off reusable bottles for the whole day",
+  "throw recyclable objects in recycle bins",
+];
 
 function Tracker() {
   const nowDay = parseInt(dayjs().format("D"));
@@ -63,36 +69,9 @@ function Tracker() {
               ))}
             </div>
           </div>
-          <div className="grid grid-cols-12">
-            <h5 className="col-span-2 flex p-[10px] text-gray-200 border-[0.8px] border-gray-600 text-[15px] items-center justify-center">
-              reduce water use for the next 7 days
-            </h5>
-            <div className="col-span-10 grid grid-cols-7">
-              {data.map((d, i) => (
-                <div className="col-span-1 hover:bg-gray-700 cursor-pointer flex flex-col items-center py-2 border-b-gray-600 border-b-[0.8px]"></div>
-              ))}
-            </div>
-          </div>
-          <div className="grid grid-cols-12">
-            <h5 className="col-span-2 flex p-[10px] text-gray-200 border-[0.8px] border-gray-600 text-[15px] items-center justify-center">
-              drink off reusable bottles for the whole day
-            </h5>
-            <div className="col-span-10 grid grid-cols-7">
-              {data.map((d, i) => (
-                <div className="col-span-1 hover:bg-gray-700 cursor-pointer flex flex-col items-center py-2 border-b-gray-600 border-b-[0.8px]"></div>
-              ))}
-            </div>
-          </div>
-          <div className="grid grid-cols-12">
-            <h5 className="col-span-2 flex p-[10px] text-gray-200 border-[0.8px] border-gray-600 text-[15px] items-center justify-center">
-              throw recyclable objects in recycle bins
-            </h5>
-            <div className="col-span-10 grid grid-cols-7">
-              {data.map((d, i) => (
-                <div className="col-span-1 hover:bg-gray-700 cursor-pointer flex flex-col items-center py-2 border-b-gray-600 border-b-[0.8px]"></div>
-              ))}
-            </div>
-          </div>
+          {challenges.map((c) => (
+            <Challenges c={c} data={data} />
+          ))}
         </div>
       </div>
     </>
