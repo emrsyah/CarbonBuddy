@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+  .container {
+    @apply mx-16 flex flex-col gap-8 text-white bggra;
+  }
+}
+
+*{
+  font-family: "Nunito", 'Courier New', Courier, monospace;
+}
+
+body{
+  background-color: rgb(17, 24, 39);
+  color: white;
+}
