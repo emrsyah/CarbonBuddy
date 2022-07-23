@@ -95,7 +95,7 @@ const Result = () => {
           exit="exit"
           className="flex-grow"
         >
-          <div className="flex items-center h-full justify-center">
+          <div className="flex items-center my-36 justify-center">
             <h2 className="text-5xl overflow-hidden font-semibold text-white">
               Calculating...
             </h2>
@@ -105,12 +105,13 @@ const Result = () => {
     );
   } else {
     return (
+      <div className="overflow-hidden">
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
         exit="exit"
-        className="overflow-hidden mx-3 flex-col h-screen flex items-center justify-center text-white"
+        className="overflow-hidden mx-3 flex-col my-12 flex items-center justify-center text-white"
       >
         <div className="flex flex-col gap-4">
           <motion.h5
@@ -195,6 +196,7 @@ const Result = () => {
           )}
         </div>
       </motion.div>
+      </div>
     );
   }
 };

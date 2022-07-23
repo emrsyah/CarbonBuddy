@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import PageNavigation from "../../components/PageNavigation";
 import { Icon } from "@iconify/react";
 import dayjs from "dayjs";
 import Challenges from "../../components/Challenges";
+import { useLocation } from "react-router-dom";
 
 const data = [1, 2, 3, 4, 5, 6, 7];
 const challenges = [
   "reduce water use for the next 7 days",
   "drink off reusable bottles for the whole day",
-//   "throw recyclable objects in recycle bins",
+  //   "throw recyclable objects in recycle bins",
 ];
 
 function Tracker() {
-  const nowDay = parseInt(dayjs().format("D"));
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.pathname.includes("/tracker")) navigate("/app/home");
+  }, []);
 
   return (
     <>
@@ -78,15 +83,14 @@ function Tracker() {
           ))}
         </div>
 
-        <div className="flex my-20 items-center justify-center flex-col">
+        {/* <div className="flex my-20 items-center justify-center flex-col">
             <h3 className="text-3xl font-semibold">Try This Out</h3>
             <div className="flex items-center my-4 gap-4 justify-center">
                 <div>
-                    
+
                 </div>
             </div>
-        </div>
-
+        </div> */}
       </div>
     </>
   );
