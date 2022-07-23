@@ -9,7 +9,7 @@ const data = [1, 2, 3, 4, 5, 6, 7];
 const challenges = [
   "reduce water use for the next 7 days",
   "drink off reusable bottles for the whole day",
-  "throw recyclable objects in recycle bins",
+//   "throw recyclable objects in recycle bins",
 ];
 
 function Tracker() {
@@ -22,6 +22,8 @@ function Tracker() {
       </Helmet>
       <div className="my-8 max-w-6xl mx-auto">
         <PageNavigation />
+
+        {/* CHALLENGES GENERATOR */}
         <div className="pb-2 my-8 border-b-[1px] border-b-gray-700 flex items-center  justify-between">
           <h5 className="text-xl font-medium">Our Challenges From API</h5>
           <div className="flex items-center gap-3">
@@ -33,6 +35,8 @@ function Tracker() {
             </button>
           </div>
         </div>
+
+        {/* CHALLENGES TRACKER */}
         <div className="border-[0.8px] border-gray-600">
           <div className="grid grid-cols-12">
             <h5 className="col-span-2 border-gray-600 border-[0.8px] text-lg font-medium text-center flex items-center justify-center">
@@ -73,6 +77,16 @@ function Tracker() {
             <Challenges c={c} data={data} />
           ))}
         </div>
+
+        <div className="flex my-20 items-center justify-center flex-col">
+            <h3 className="text-3xl font-semibold">Try This Out</h3>
+            <div className="flex items-center my-4 gap-4 justify-center">
+                <div>
+                    
+                </div>
+            </div>
+        </div>
+
       </div>
     </>
   );
