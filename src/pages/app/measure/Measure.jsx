@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
-import PageNavigation from "../../components/PageNavigation";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { climatiqAtom } from "../../../atoms/climatiqAtom";
+import PageNavigation from "../../../components/PageNavigation";
 
 const buttonVariants = {
   hover: {
@@ -17,17 +19,23 @@ const buttonVariants = {
 };
 
 function Measure() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const setClimatiqData = useSetRecoilState(climatiqAtom);
+
+  useEffect(() => {
+    setClimatiqData([]);
+  }, []);
+
   return (
     <>
       <Helmet>
         <title>Measure Your Carbon Footprint | Carbon Buddy</title>
       </Helmet>
-      <div className="my-8 max-w-6xl mx-auto">
+      <div className="my-8 max-w-6xl mx-4 xl:mx-auto">
         <PageNavigation />
         <div className="flex flex-col my-28 gap-10 items-center w-full flex-grow justify-center">
           <div>
-            <h5 className="text-white font-semibold text-4xl overflow-hidden">
+            <h5 className="text-white text-center font-semibold text-4xl overflow-hidden">
               How Much Carbon Footprint You've Made Today🤔?
             </h5>
             <p className="text-gray-300 mt-2 text-center">
@@ -35,7 +43,7 @@ function Measure() {
             </p>
           </div>
           <motion.button
-            onClick={() => navigate("/measure/transport")}
+            onClick={() => navigate("transport")}
             variants={buttonVariants}
             whileHover="hover"
             className="py-[10px] px-8 items-center flex gap-[10px] font-medium text-white border-2 border-white rounded-full shadow-sm shadow-gray-500"

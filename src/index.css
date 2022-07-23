@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap');@tailwind base;
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap");
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 @layer components {
   .container {
@@ -9,15 +9,21 @@
   }
 }
 
-*{
-  font-family: "Nunito", "Roboto", 'Courier New', Courier, monospace;
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-.roboto{
+* {
+  font-family: "Nunito", "Roboto", "Courier New", Courier, monospace;
+}
+
+.roboto {
   font-family: "Roboto";
 }
 
-body{
+body {
   background-color: rgb(17, 24, 39);
   color: white;
 }
