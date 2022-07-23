@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import PageNavigation from "../../components/PageNavigation";
+import { toast } from "react-toastify";
 
 // todo mungkin buat direveal ini berapa itu berapa bisa lewat toast
 
@@ -42,10 +43,17 @@ function HighLow() {
   }, []);
 
   const clickHandler = (choosen) => {
+    if (choosen[0] > choosen[1]) {
+      toast.success("You Right🥳🥳🥳", {autoClose:3000, position: "top-center"})
+    }else if(choosen[0] < choosen[1]){
+        toast.error("Sorry You Wrong😿😿😿", {autoClose:3000, position: "top-center"})
+    }else{
+        toast.info("Its a Tie😯", {autoClose:3000, position: "top-center"})
+    }
     setReveal(true);
     setTimeout(() => {
-      setReveal(false);
       getData();
+      setReveal(false);
     }, 4000);
   };
 
@@ -54,19 +62,29 @@ function HighLow() {
       <Helmet>
         <title>Higher Lower | Carbon Buddy</title>
       </Helmet>
-      <div className="my-8 max-w-6xl mx-auto">
+      <div className="my-8 max-w-6xl mx-10 xl:mx-20 2xl:mx-auto">
         <PageNavigation />
         <div className="grid grid-cols-11 gap-4 my-10">
           <button
             disabled={reveal || !first}
-            onClick={() => clickHandler(1)}
+            onClick={() =>
+              clickHandler([first?.carbonAmount, second?.carbonAmount])
+            }
             className="bg-gray-800 text-center col-span-5 border-[1.5px] border-gray-800 hover:border-white cursor-pointer h-80 flex flex-col gap-1 justify-center items-center p-6 rounded-md"
           >
             <h5 className="text-xl">
               {first?.Activity ? first.Activity : "Loading..."}
             </h5>
-            <p className="text-blue-600 font-medium">
-              {reveal && <>Carbon Footprint: <span className="font-semibold text-blue-500 underline">{first?.carbonAmount}</span> KgCO₂e</>}
+            <p className="text-blue-600 text-lg font-medium">
+              {reveal && (
+                <>
+                  Carbon Footprint:{" "}
+                  <span className="font-semibold text-blue-500 underline">
+                    {first?.carbonAmount}
+                  </span>{" "}
+                  KgCO₂e
+                </>
+              )}
             </p>
           </button>
           <div className="col-span-1 flex items-center justify-center text-xl font-medium">
@@ -74,14 +92,24 @@ function HighLow() {
           </div>
           <button
             disabled={reveal || !second}
-            onClick={() => clickHandler(2)}
+            onClick={() =>
+              clickHandler([second?.carbonAmount, first?.carbonAmount])
+            }
             className="bg-gray-800 text-center col-span-5 border-[1.5px] border-gray-800 hover:border-white cursor-pointer h-80 flex flex-col gap-1 justify-center items-center  p-6 rounded-md"
           >
             <h5 className="text-xl">
               {second?.Activity ? second.Activity : "Loading..."}
             </h5>
-            <p className="text-blue-600 font-medium">
-              {reveal && <>Carbon Footprint: <span className="font-semibold text-blue-500 underline">{second?.carbonAmount}</span> KgCO₂e</>}
+            <p className="text-blue-600 text-lg font-medium">
+              {reveal && (
+                <>
+                  Carbon Footprint:{" "}
+                  <span className="font-semibold text-blue-500 underline">
+                    {second?.carbonAmount}
+                  </span>{" "}
+                  KgCO₂e
+                </>
+              )}
             </p>
           </button>
         </div>
