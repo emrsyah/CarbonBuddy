@@ -1,7 +1,7 @@
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { userAtom } from "../../atoms/userAtom";
 import { auth } from "../../firebase";
 import lottieJson from "../../assets/loading.json";
@@ -9,7 +9,7 @@ import Lottie from "lottie-web";
 import NavApp from "../../components/NavApp";
 
 function Layout() {
-  const setUser = useSetRecoilState(userAtom);
+  const [user, setUser] = useRecoilState(userAtom);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate()
 
@@ -46,7 +46,7 @@ function Layout() {
     return () => instance.destroy();
   }, []);
 
-  if (loading) {
+  if (loading || !user) {
     return (
       <div className="flex justify-center items-center h-[100vh] flex-col">
         {/* <img src={loading} alt="" /> */}

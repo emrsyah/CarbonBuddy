@@ -57,7 +57,12 @@ function Tracker() {
             })
           );
           // console.log(withTrack[0].data())
-          const trackers = withTrack.map(i => i.data())
+          const trackers = withTrack.map(i => {
+            return {
+              ...i.data(),
+              name: i.id
+            }
+          })
           const satuin = snapshot.docs.map((doc, i)=>{
             return({...doc.data(), id: doc.id, tracker: trackers[i]})
           })
@@ -79,7 +84,7 @@ function Tracker() {
       getChallenges();
       getFirebaseChallenges();
     } catch (err) {
-      console.log("errr");
+      console.log(err);
     }
   }, []);
 
@@ -258,7 +263,7 @@ function Tracker() {
                 <>
                   {firebaseChallenge?.map((c, i) => (
                     <div key={i}>
-                      <Challenges name={c.name} data={data} />
+                      <Challenges id={c.id} name={c.name} data={data} tracker={c.tracker} />
                     </div>
                   ))}{" "}
                 </>
