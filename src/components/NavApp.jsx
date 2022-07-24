@@ -14,9 +14,9 @@ function NavApp() {
         <img src={logo} alt="Logo" className="w-44" />
       </Link>
       <div className="flex items-center gap-8">
-        <Link to="/app/achievement">
+        {/* <Link to="/app/achievement">
           <Icon icon="carbon:trophy" width={32} />
-        </Link>
+        </Link> */}
         <NavProfile img={user.image} />
         {/* <img src={user.image} alt="profile" className="w-10 h-10 rounded-full border-2 border-blue-500" /> */}
       </div>

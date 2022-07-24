@@ -39,7 +39,7 @@ function App() {
               <Route path="measure/result" element={<Result />} />
               <Route path="fun-fact" element={<FunFact />} />
               <Route path="high-low" element={<HighLow />} />
-              <Route path="achievement" element={<Achievement />} />
+              {/* <Route path="achievement" element={<Achievement />} /> */}
             </Route>
           </Routes>
         </BrowserRouter>
