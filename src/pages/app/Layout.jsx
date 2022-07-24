@@ -7,6 +7,8 @@ import { auth } from "../../firebase";
 import lottieJson from "../../assets/loading.json";
 import Lottie from "lottie-web";
 import NavApp from "../../components/NavApp";
+import logo from "../../assets/navLogo.svg";
+
 
 function Layout() {
   const [user, setUser] = useRecoilState(userAtom);
@@ -51,7 +53,7 @@ function Layout() {
       <div className="flex justify-center items-center h-[100vh] flex-col">
         {/* <img src={loading} alt="" /> */}
         {/* <img src={logo} alt="" className="h-14" /> */}
-        <h6 className="text-2xl font-semibold">CarbonBuddy🌏</h6>
+        <img src={logo} alt="Logo" className="w-56" />
         <div id="lottie-container" className="w-28" />
         {/* {""} */}
         {/* <div>loading</div> */}
