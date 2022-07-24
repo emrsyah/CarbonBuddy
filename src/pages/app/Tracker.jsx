@@ -8,10 +8,13 @@ import { useLocation } from "react-router-dom";
 import {
   addDoc,
   collection,
+  doc,
+  getDoc,
   onSnapshot,
   orderBy,
   query,
   serverTimestamp,
+  setDoc,
   where,
 } from "firebase/firestore";
 import { firestoreDb } from "../../firebase";
@@ -35,10 +38,31 @@ function Tracker() {
         where("userId", "==", user.uid),
         orderBy("createdAt", "desc")
       ),
-      (snapshot) => {
+      async (snapshot) => {
         if (snapshot.docs.length) {
-          // console.log(snapshot.docs[0].data())
-          setFirebaseChallenge(snapshot.docs);
+          const withTrack = await Promise.all(
+            snapshot.docs.map( async (document) => {
+              return getDoc(
+                doc(
+                  firestoreDb,
+                  "challenges",
+                  document.id,
+                  "tracker",
+                  dayjs().format("MMMYYYY")
+                )
+              );
+              // const data = docSnap?.data();
+              // console.log({ ...document.data(), tracker: data });
+              // return { ...document.data(), tracker: data };
+            })
+          );
+          // console.log(withTrack[0].data())
+          const trackers = withTrack.map(i => i.data())
+          const satuin = snapshot.docs.map((doc, i)=>{
+            return({...doc.data(), id: doc.id, tracker: trackers[i]})
+          })
+          // console.log(satuin)
+          setFirebaseChallenge(satuin);
           setStatus("finished");
         } else {
           setFirebaseChallenge();
@@ -82,14 +106,60 @@ function Tracker() {
   };
 
   const addHandler = async () => {
-    console.log(error);
     try {
-      await addDoc(collection(firestoreDb, "challenges"), {
+      // add main challenge
+      const docRef = await addDoc(collection(firestoreDb, "challenges"), {
         userId: user.uid,
         name: challenges.name,
         difficulty: challenges.difficulty,
         createdAt: serverTimestamp(),
       });
+
+      // add track
+      await setDoc(
+        doc(
+          firestoreDb,
+          "challenges",
+          docRef.id,
+          "tracker",
+          dayjs().format("MMMYYYY")
+        ),
+        {
+          data: {
+            1: false,
+            2: false,
+            3: false,
+            4: false,
+            5: false,
+            6: false,
+            7: false,
+            8: false,
+            9: false,
+            10: false,
+            11: false,
+            12: false,
+            13: false,
+            14: false,
+            15: false,
+            16: false,
+            17: false,
+            18: false,
+            19: false,
+            20: false,
+            21: false,
+            22: false,
+            23: false,
+            24: false,
+            25: false,
+            26: false,
+            27: false,
+            28: false,
+            29: false,
+            30: false,
+            31: false,
+          },
+        }
+      );
       getChallenges();
     } catch (err) {
       console.error(err);
@@ -145,6 +215,7 @@ function Tracker() {
             <div className="col-span-10 grid grid-cols-7">
               {data.map((d, i) => (
                 <div
+                  key={i}
                   className={`col-span-1 flex flex-col items-center border-gray-600 border-[0.8px] py-2 border-t-gray-600 ${
                     i === 6 && "bg-blue-500"
                   }`}
@@ -187,7 +258,7 @@ function Tracker() {
                 <>
                   {firebaseChallenge?.map((c, i) => (
                     <div key={i}>
-                      <Challenges name={c.data().name} data={data} />
+                      <Challenges name={c.name} data={data} />
                     </div>
                   ))}{" "}
                 </>

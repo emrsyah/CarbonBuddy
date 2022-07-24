@@ -9,8 +9,9 @@ function Challenges({ name, data }) {
       <div className="col-span-10 grid grid-cols-7">
         {data.map((d, i) => (
           <div
+            key={i}
             className={`col-span-1 ${
-              i == 6 && "hover:bg-gray-700 cursor-pointer"
+              i == 6 && "hover:bg-gray-700 cursor-pointer border-l-[0.8px] border-l-gray-600"
             } flex flex-col items-center py-2 border-b-gray-600 border-b-[0.8px]`}
           ></div>
         ))}
