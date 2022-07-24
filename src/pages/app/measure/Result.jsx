@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -74,20 +74,55 @@ const childVariants = {
   },
 };
 
+const myHeaders = new Headers();
+myHeaders.append(
+  "Authorization",
+  `Bearer ${import.meta.env.VITE_REACT_APP_BEARER_TOKEN}`
+);
+
 const Result = () => {
   const navigate = useNavigate();
   const [completed, setCompleted] = useState(85);
   const [mode, setMode] = useState("calculating");
   const [showShare, setShowShare] = useState(false);
   const data = useRecoilValue(climatiqAtom);
+  const [carbonRes, setCarbonRes] = useState(0)
+  const [detail, setDetail] = useState({})
 
-  setTimeout(() => {
-    console.log(data)
+  const getData = async () => {
+    const mapped = Object.keys(data).map(function (key) {
+      return data[key];
+    });
+    const texts = await Promise.all(
+      mapped.map(async (data) => {
+        const raw = JSON.stringify(data);
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+        };
+        const resp = await fetch(
+          "https://beta3.api.climatiq.io/estimate",
+          requestOptions
+        );
+        return resp.json();
+      })
+    );
+    const jumlah = texts.reduce((a, b) => {
+      return a + b.co2e;
+    }, 0);
+    return [Math.round(jumlah), texts]
+  };
+
+  useEffect(()=>{
     setCompleted(100);
-  }, 50);
-  setTimeout(() => {
-    setMode("finished");
-  }, 2500);
+    getData().then((res)=>{
+      setCarbonRes(res[0])
+      setDetail(res[1])
+      setMode('finished')
+    })
+  }, [])
+
 
   if (mode === "calculating") {
     return (
@@ -124,7 +159,7 @@ const Result = () => {
               className="text-4xl overflow-hidden font-medium"
             >
               {/* Test Text Saya */}
-              Your Carbon Footprint is: 10 KgCO₂e
+              Your Carbon Footprint is: {carbonRes} KgCO₂e
             </motion.h5>
             <motion.p
               variants={childVariants}
