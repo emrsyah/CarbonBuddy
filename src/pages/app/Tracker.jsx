@@ -5,24 +5,28 @@ import { Icon } from "@iconify/react";
 import dayjs from "dayjs";
 import Challenges from "../../components/Challenges";
 import { useLocation } from "react-router-dom";
-import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp, where } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+  where,
+} from "firebase/firestore";
 import { firestoreDb } from "../../firebase";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "../../atoms/userAtom";
 
 const data = [1, 2, 3, 4, 5, 6, 7];
-const challengesMe = [
-  "reduce water use for the next 7 days",
-  "drink off reusable bottles for the whole day",
-  //   "throw recyclable objects in recycle bins",
-];
 
 function Tracker() {
   const location = useLocation();
   const [challenges, setChallenges] = useState("");
   const user = useRecoilValue(userAtom);
   const [error, setError] = useState(false);
-  const [firebaseChallenge, setFirebaseChallenge] = useState()
+  const [firebaseChallenge, setFirebaseChallenge] = useState();
+  const [status, setStatus] = useState("loading");
 
   const getFirebaseChallenges = () => {
     const unsubscribe = onSnapshot(
@@ -35,10 +39,10 @@ function Tracker() {
         if (snapshot.docs.length) {
           // console.log(snapshot.docs[0].data())
           setFirebaseChallenge(snapshot.docs);
-          // setStatus("finished");
+          setStatus("finished");
         } else {
           setFirebaseChallenge();
-          // setStatus("no data");
+          setStatus("no data");
         }
       }
     );
@@ -49,7 +53,7 @@ function Tracker() {
     if (!location.pathname.includes("/tracker")) navigate("/app/home");
     try {
       getChallenges();
-      getFirebaseChallenges()
+      getFirebaseChallenges();
     } catch (err) {
       console.log("errr");
     }
@@ -86,7 +90,7 @@ function Tracker() {
         difficulty: challenges.difficulty,
         createdAt: serverTimestamp(),
       });
-      getChallenges()
+      getChallenges();
     } catch (err) {
       console.error(err);
     }
@@ -102,7 +106,13 @@ function Tracker() {
 
         {/* CHALLENGES GENERATOR */}
         <div className="pb-2 my-8 border-b-[1px] border-b-gray-700 flex items-center  justify-between">
-          <h5 className={`text-xl font-medium ${challenges.name === "There is something wrong, please try again in a few seconds" && "!text-red-400"}`}>
+          <h5
+            className={`text-xl font-medium ${
+              challenges.name ===
+                "There is something wrong, please try again in a few seconds" &&
+              "!text-red-400"
+            }`}
+          >
             {challenges === "" ? (
               "Generating Some Challenges..."
             ) : (
@@ -163,11 +173,27 @@ function Tracker() {
               ))}
             </div>
           </div>
-          {firebaseChallenge?.map((c, i) => (
-            <div key={i}>
-              <Challenges name={c.data().name} data={data} />
+          {status === "loading" ? (
+            <div className="border-gray-600 flex justify-center text-gray-200 border-[0.8px] py-2">
+              <p className="pl-4">Getting Your Data...</p>
             </div>
-          ))}
+          ) : (
+            <>
+              {status === "no data" ? (
+                <div className="border-gray-600 flex justify-center text-gray-200 border-[0.8px] py-2">
+                  <p className="pl-4">No Data Yet, Accept Some Challenge</p>
+                </div>
+              ) : (
+                <>
+                  {firebaseChallenge?.map((c, i) => (
+                    <div key={i}>
+                      <Challenges name={c.data().name} data={data} />
+                    </div>
+                  ))}{" "}
+                </>
+              )}
+            </>
+          )}
         </div>
 
         {/* <div className="flex my-20 items-center justify-center flex-col">

@@ -93,7 +93,7 @@ function HighLow() {
           </button>
           <div className="col-span-1 gap-4 flex flex-col items-center justify-center">
             <h5 className="text-lg">Streak: <span className="text-blue-500 font-semibold">{score}</span></h5>
-            <p className="text-xl font-medium text-xl">OR</p>
+            <p className="font-medium text-2xl">OR</p>
           </div>
           <button
             disabled={reveal || !second}
