@@ -20,35 +20,53 @@ const challengesMe = [
 function Tracker() {
   const location = useLocation();
   const [challenges, setChallenges] = useState("");
-  const user = useRecoilValue(userAtom)
+  const user = useRecoilValue(userAtom);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     if (!location.pathname.includes("/tracker")) navigate("/app/home");
-    getChallenges()
+    try {
+      getChallenges();
+    } catch (err) {
+      console.log("errr");
+    }
   }, []);
 
-  const getChallenges= async () => {
-    const id = Math.floor(Math.random() * (25 - 4)) + 4;
-    const res = await fetch(
-      "https://x8ki-letl-twmt.n7.xano.io/api:IBNbZUaL/challenges/" + id
-    );
-    const json = await res.json();
-    setChallenges({ ...json });
-    // console.log(json)
+  const getChallenges = async () => {
+    try {
+      const id = Math.floor(Math.random() * (25 - 4)) + 4;
+      const res = await fetch(
+        "https://x8ki-letl-twmt.n7.xano.io/api:IBNbZUaL/challenges/" + id
+      );
+      if (res.status !== 200) {
+        throw new Error("Invalid status code: " + res.status);
+      }
+      const json = await res.json();
+      setError(false);
+      setChallenges({ ...json });
+      // console.log(json)
+    } catch (err) {
+      console.error(err);
+      setError(true);
+      setChallenges({
+        name: "There is something wrong, please try again in a few seconds",
+      });
+    }
   };
 
-  const addHandler = async () =>{
-    try{
-      await addDoc(collection(firestoreDb, "challenges"),{
+  const addHandler = async () => {
+    console.log(error);
+    try {
+      await addDoc(collection(firestoreDb, "challenges"), {
         userId: user.uid,
         name: challenges.name,
         difficulty: challenges.difficulty,
-        createdAt: serverTimestamp()
-      })
-    }catch(err){
-      console.error(err)
+        createdAt: serverTimestamp(),
+      });
+    } catch (err) {
+      console.error(err);
     }
-  }
+  };
 
   return (
     <>
@@ -61,17 +79,24 @@ function Tracker() {
         {/* CHALLENGES GENERATOR */}
         <div className="pb-2 my-8 border-b-[1px] border-b-gray-700 flex items-center  justify-between">
           <h5 className="text-xl font-medium">
-            {challenges === "" ? "Generating Some Challenges..." : <>{challenges.name}</>}
+            {challenges === "" ? (
+              "Generating Some Challenges..."
+            ) : (
+              <>{challenges.name}</>
+            )}
           </h5>
           <div className="flex items-center gap-3">
-            <button 
-            onClick={()=>addHandler()}
-            className="bg-blue-500 hover:bg-blue-600 py-2 px-5 font-medium rounded">
+            <button
+              disabled={error}
+              onClick={() => addHandler()}
+              className="bg-blue-500 hover:bg-blue-600 py-2 px-5 font-medium rounded"
+            >
               Accept Challenge
             </button>
-            <button 
-            onClick={()=>getChallenges()}
-            className="bg-white text-blue-600 p-[6px] hover:bg-gray-200 rounded">
+            <button
+              onClick={() => getChallenges()}
+              className="bg-white text-blue-600 p-[6px] hover:bg-gray-200 rounded"
+            >
               <Icon icon="ic:sharp-restart-alt" width={28} />
             </button>
           </div>
