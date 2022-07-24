@@ -1,4 +1,4 @@
-import { signInWithPopup } from "firebase/auth";
+import { onAuthStateChanged, signInWithPopup } from "firebase/auth";
 import {
   addDoc,
   collection,
@@ -7,7 +7,7 @@ import {
   serverTimestamp,
   where,
 } from "firebase/firestore";
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { auth, firestoreDb, googleProvider } from "../firebase";
@@ -15,6 +15,14 @@ import { toast } from "react-toastify";
 
 function Home() {
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+          navigate('/app/tracker')
+      }
+    });
+  }, [])
 
   const loginHandler = async () => {
     try {

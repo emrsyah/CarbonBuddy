@@ -216,33 +216,33 @@ const Result = () => {
               >
                 <FacebookShareButton
                   // className="!text-blue-600"
-                  url={"https://youtube.com"}
+                  url={"https://carbon-buddy.vercel.app"}
                   quote={
-                    "My estimated carbon footprint today is 10Co2Kg, Lets calculate yours easily using CarbonBuddy"
+                    `My estimated carbon footprint today is ${carbonRes} KgCO₂e, Lets calculate yours easily using Carbon Buddy`
                   }
                   hashtag="#saveearth"
                 >
                   <FacebookIcon className="w-10 h-10 rounded-full" />
                 </FacebookShareButton>
                 <TwitterShareButton
-                  url={"https://youtube.com"}
-                  title="My estimated carbon footprint today is 10Co2Kg"
+                  url={"https://carbon-buddy.vercel.app"}
+                  title={`My estimated carbon footprint today is ${carbonRes} KgCO₂e, Calculate yours by answering simple questions in Carbon Buddy`}
                   related={["climatechange", "saveearth"]}
                   hashtags={["saveearth", "climatechange"]}
                 >
                   <TwitterIcon className="w-10 h-10 rounded-full" />
                 </TwitterShareButton>
                 <TelegramShareButton
-                  url={"https://youtube.com"}
-                  title="My estimated carbon footprint today is 10Co2Kg"
+                  url={"https://carbon-buddy.vercel.app"}
+                  title={`My estimated carbon footprint today is ${carbonRes} KgCO₂e, Calculate yours by answering simple questions in Carbon Buddy`}
                 >
                   <TelegramIcon className="w-10 h-10 rounded-full" />
                 </TelegramShareButton>
                 <LinkedinShareButton
-                  url={"https://youtube.com"}
-                  source={"https://youtube.com"}
-                  title="My estimated carbon footprint today is 10Co2Kg"
-                  summary="My estimated carbon footprint today is 10Co2Kg - See yours with answering simple question in CarbonBuddy"
+                  url={"https://carbon-buddy.vercel.app"}
+                  source={"https://carbon-buddy.vercel.app"}
+                  title={`My estimated carbon footprint today is ${carbonRes} KgCO₂e`}
+                  summary={`My estimated carbon footprint today is ${carbonRes} KgCO₂e - See yours with answering simple question in Carbon Buddy`}
                 >
                   <LinkedinIcon className="w-10 h-10 rounded-full" />
                 </LinkedinShareButton>
