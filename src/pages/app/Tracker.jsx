@@ -5,6 +5,10 @@ import { Icon } from "@iconify/react";
 import dayjs from "dayjs";
 import Challenges from "../../components/Challenges";
 import { useLocation } from "react-router-dom";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { firestoreDb } from "../../firebase";
+import { useRecoilValue } from "recoil";
+import { userAtom } from "../../atoms/userAtom";
 
 const data = [1, 2, 3, 4, 5, 6, 7];
 const challengesMe = [
@@ -16,6 +20,7 @@ const challengesMe = [
 function Tracker() {
   const location = useLocation();
   const [challenges, setChallenges] = useState("");
+  const user = useRecoilValue(userAtom)
 
   useEffect(() => {
     if (!location.pathname.includes("/tracker")) navigate("/app/home");
@@ -32,6 +37,19 @@ function Tracker() {
     // console.log(json)
   };
 
+  const addHandler = async () =>{
+    try{
+      await addDoc(collection(firestoreDb, "challenges"),{
+        userId: user.uid,
+        name: challenges.title,
+        difficulty: challenges.difficulity,
+        createdAt: serverTimestamp()
+      })
+    }catch(err){
+      console.error(err)
+    }
+  }
+
   return (
     <>
       <Helmet>
@@ -46,7 +64,9 @@ function Tracker() {
             {challenges === "" ? "Generating Some Challenges..." : <>{challenges.title}</>}
           </h5>
           <div className="flex items-center gap-3">
-            <button className="bg-blue-500 hover:bg-blue-600 py-2 px-5 font-medium rounded">
+            <button 
+            onClick={()=>addHandler()}
+            className="bg-blue-500 hover:bg-blue-600 py-2 px-5 font-medium rounded">
               Accept Challenge
             </button>
             <button 

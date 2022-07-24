@@ -93,6 +93,7 @@ const Result = () => {
     const mapped = Object.keys(data).map(function (key) {
       return data[key];
     });
+    console.log(mapped)
     const texts = await Promise.all(
       mapped.map(async (data) => {
         const raw = JSON.stringify(data);
@@ -117,6 +118,7 @@ const Result = () => {
   useEffect(()=>{
     setCompleted(100);
     getData().then((res)=>{
+      // console.log(res)
       setCarbonRes(res[0])
       setDetail(res[1])
       setMode('finished')
