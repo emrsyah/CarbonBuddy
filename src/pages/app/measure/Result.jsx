@@ -88,12 +88,13 @@ const Result = () => {
   const data = useRecoilValue(climatiqAtom);
   const [carbonRes, setCarbonRes] = useState(0)
   const [detail, setDetail] = useState({})
+  const [percentage, setPercentage] = useState(0)
 
   const getData = async () => {
     const mapped = Object.keys(data).map(function (key) {
       return data[key];
     });
-    console.log(mapped)
+    // console.log(mapped)
     const texts = await Promise.all(
       mapped.map(async (data) => {
         const raw = JSON.stringify(data);
@@ -121,6 +122,8 @@ const Result = () => {
       // console.log(res)
       setCarbonRes(res[0])
       setDetail(res[1])
+      // console.log(Math.round(100*carbonRes/14))
+      setPercentage(Math.round(100*carbonRes/14))
       setMode('finished')
     })
   }, [])
@@ -167,19 +170,19 @@ const Result = () => {
               variants={childVariants}
               className="text-xl text-gray-100"
             >
-              Its about 39% lower than average people in this world
+              Its about {percentage > 100 ? `${Math.round(percentage/100)}x` : `${100-percentage}`} {percentage > 100 ? "higher" : "lower"} than average people in this world
             </motion.p>
             <motion.p
               variants={childVariants}
               className="text-xl text-gray-100"
             >
-              Which our system consider still in a Good Area😁
+              {percentage > 100 ? "You need to try reducing your carbon footprint" : "Which our system consider still in a Good Area😁"}
             </motion.p>
             <motion.p
               variants={childVariants}
               className="text-xl text-gray-100"
             >
-              Keep it up, here are a few things we suggest you to do
+              {percentage > 100 ? "But dont worry" : "Keep it up"}, here are a few things we suggest you to do
             </motion.p>
             <motion.div
               variants={childVariants}
