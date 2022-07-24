@@ -41,8 +41,8 @@ function Tracker() {
     try{
       await addDoc(collection(firestoreDb, "challenges"),{
         userId: user.uid,
-        name: challenges.title,
-        difficulty: challenges.difficulity,
+        name: challenges.name,
+        difficulty: challenges.difficulty,
         createdAt: serverTimestamp()
       })
     }catch(err){
@@ -65,7 +65,7 @@ function Tracker() {
           </h5>
           <div className="flex items-center gap-3">
             <button 
-            // onClick={()=>addHandler()}
+            onClick={()=>addHandler()}
             className="bg-blue-500 hover:bg-blue-600 py-2 px-5 font-medium rounded">
               Accept Challenge
             </button>
