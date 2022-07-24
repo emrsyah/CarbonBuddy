@@ -5,7 +5,7 @@ import { Icon } from "@iconify/react";
 import dayjs from "dayjs";
 import Challenges from "../../components/Challenges";
 import { useLocation } from "react-router-dom";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp, where } from "firebase/firestore";
 import { firestoreDb } from "../../firebase";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "../../atoms/userAtom";
@@ -22,11 +22,34 @@ function Tracker() {
   const [challenges, setChallenges] = useState("");
   const user = useRecoilValue(userAtom);
   const [error, setError] = useState(false);
+  const [firebaseChallenge, setFirebaseChallenge] = useState()
+
+  const getFirebaseChallenges = () => {
+    const unsubscribe = onSnapshot(
+      query(
+        collection(firestoreDb, "challenges"),
+        where("userId", "==", user.uid),
+        orderBy("createdAt", "desc")
+      ),
+      (snapshot) => {
+        if (snapshot.docs.length) {
+          // console.log(snapshot.docs[0].data())
+          setFirebaseChallenge(snapshot.docs);
+          // setStatus("finished");
+        } else {
+          setFirebaseChallenge();
+          // setStatus("no data");
+        }
+      }
+    );
+    return unsubscribe;
+  };
 
   useEffect(() => {
     if (!location.pathname.includes("/tracker")) navigate("/app/home");
     try {
       getChallenges();
+      getFirebaseChallenges()
     } catch (err) {
       console.log("errr");
     }
@@ -63,6 +86,7 @@ function Tracker() {
         difficulty: challenges.difficulty,
         createdAt: serverTimestamp(),
       });
+      getChallenges()
     } catch (err) {
       console.error(err);
     }
@@ -139,8 +163,8 @@ function Tracker() {
               ))}
             </div>
           </div>
-          {challengesMe.map((c) => (
-            <Challenges c={c} data={data} />
+          {firebaseChallenge?.map((c) => (
+            <Challenges name={c.data().name} data={data} />
           ))}
         </div>
 

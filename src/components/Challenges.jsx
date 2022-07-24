@@ -1,10 +1,10 @@
 import React from "react";
 
-function Challenges({c, data}) {
+function Challenges({name, data}) {
   return (
     <div className="grid grid-cols-12">
       <h5 className="col-span-2 flex p-[10px] text-gray-200 border-[0.8px] border-gray-600 text-[15px] items-center justify-center">
-        {c}
+        {name}
       </h5>
       <div className="col-span-10 grid grid-cols-7">
         {data.map((d, i) => (

@@ -7,7 +7,6 @@ import NavProfile from "./NavProfile";
 
 function NavApp() {
   const user = useRecoilValue(userAtom)
-  console.log(user)
   return (
     <nav className="py-3 px-12 flex items-center justify-between border-b-gray-600 border-b-[1px]">
       <Link to="/app/tracker" className=" text-xl font-semibold">CarbonBuddy🌏</Link>
