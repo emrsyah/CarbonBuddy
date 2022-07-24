@@ -24,7 +24,7 @@ function Tracker() {
 
   useEffect(() => {
     if (!location.pathname.includes("/tracker")) navigate("/app/home");
-    getChallenges()
+    // getChallenges()
   }, []);
 
   const getChallenges= async () => {
@@ -65,7 +65,7 @@ function Tracker() {
           </h5>
           <div className="flex items-center gap-3">
             <button 
-            onClick={()=>addHandler()}
+            // onClick={()=>addHandler()}
             className="bg-blue-500 hover:bg-blue-600 py-2 px-5 font-medium rounded">
               Accept Challenge
             </button>
