@@ -9,6 +9,7 @@ function HighLow() {
   const [first, setFirst] = useState(null);
   const [second, setSecond] = useState(null);
   const [reveal, setReveal] = useState(false);
+  const [score, setScore] = useState(0)
 //   const [choosen]
   const max = 22;
 
@@ -46,8 +47,10 @@ function HighLow() {
   const clickHandler = (choosen) => {
     if (choosen[0] > choosen[1]) {
       toast.success("You Right🥳🥳🥳", {autoClose:3000, position: "top-center"})
+      setScore(score=>score + 1)
     }else if(choosen[0] < choosen[1]){
         toast.error("Sorry You Wrong😿😿😿", {autoClose:3000, position: "top-center"})
+        setScore(0)
     }else{
         toast.info("Its a Tie😯", {autoClose:3000, position: "top-center"})
     }
@@ -88,8 +91,9 @@ function HighLow() {
               )}
             </p>
           </button>
-          <div className="col-span-1 flex items-center justify-center text-xl font-medium">
-            OR
+          <div className="col-span-1 gap-4 flex flex-col items-center justify-center">
+            <h5 className="text-lg">Streak: <span className="text-blue-500 font-semibold">{score}</span></h5>
+            <p className="text-xl font-medium text-xl">OR</p>
           </div>
           <button
             disabled={reveal || !second}
