@@ -46,7 +46,7 @@ const Smoke = () => {
           uuid: "530eb16e-dfea-40d2-86f3-b0664d729cae",
         },
         parameters: {
-          money: 24000 / 15000,
+          money: 18000 / 15000,
         },
       },
     }));

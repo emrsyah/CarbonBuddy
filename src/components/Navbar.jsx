@@ -5,6 +5,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, firestoreDb, googleProvider } from "../firebase";
 import { toast } from "react-toastify";
+import logo from '../assets/navLogo.svg'
 
 
 function Navbar() {
@@ -45,7 +46,7 @@ function Navbar() {
   };
   return (
     <nav className="py-7 px-12 flex items-center justify-between">
-      <h5 className=" text-xl font-semibold">CarbonBuddy🌏</h5>
+      <img src={logo} alt="Logo" className="w-48" />
       <button 
       onClick={loginHandler}
       className="flex items-center gap-2 border-blue-500 py-2 px-4 rounded font-medium border-[1.2px] hover:text-blue-600 text-blue-500 hover:border-blue-600">

@@ -48,7 +48,7 @@ const Ship = () => {
           uuid: "f0d4bdce-ea89-480a-bb6f-6cce1292c69c",
         },
         parameters: {
-          distance: 100,
+          distance: 80,
         },
       },
     }));
@@ -64,7 +64,7 @@ const Ship = () => {
           uuid: "f0d4bdce-ea89-480a-bb6f-6cce1292c69c",
         },
         parameters: {
-          distance: 100 * parseInt(inputRef.current.value),
+          distance: 80 * parseInt(inputRef.current.value),
         },
       },
     }));

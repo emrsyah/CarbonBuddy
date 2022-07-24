@@ -47,7 +47,7 @@ const Flight = () => {
           uuid: "770c4672-83ca-4cc3-a3b4-9fdf40b42fe9",
         },
         parameters: {
-          distance: 750,
+          distance: 600,
         },
       },
     }));
@@ -63,7 +63,7 @@ const Flight = () => {
           uuid: "770c4672-83ca-4cc3-a3b4-9fdf40b42fe9",
         },
         parameters: {
-          distance: 750 * parseInt(inputRef.current.value),
+          distance: 600 * parseInt(inputRef.current.value),
         },
       },
     }));

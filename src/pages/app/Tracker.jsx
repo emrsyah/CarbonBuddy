@@ -102,7 +102,7 @@ function Tracker() {
 
         {/* CHALLENGES GENERATOR */}
         <div className="pb-2 my-8 border-b-[1px] border-b-gray-700 flex items-center  justify-between">
-          <h5 className="text-xl font-medium">
+          <h5 className={`text-xl font-medium ${challenges.name === "There is something wrong, please try again in a few seconds" && "!text-red-400"}`}>
             {challenges === "" ? (
               "Generating Some Challenges..."
             ) : (
@@ -163,8 +163,10 @@ function Tracker() {
               ))}
             </div>
           </div>
-          {firebaseChallenge?.map((c) => (
-            <Challenges name={c.data().name} data={data} />
+          {firebaseChallenge?.map((c, i) => (
+            <div key={i}>
+              <Challenges name={c.data().name} data={data} />
+            </div>
           ))}
         </div>
 

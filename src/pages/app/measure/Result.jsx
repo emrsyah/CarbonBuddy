@@ -123,7 +123,7 @@ const Result = () => {
       setCarbonRes(res[0])
       setDetail(res[1])
       // console.log(Math.round(100*carbonRes/14))
-      setPercentage(Math.round(100*carbonRes/14))
+      setPercentage(Math.round(100*res[0]/14))
       setMode('finished')
     })
   }, [])
@@ -170,7 +170,7 @@ const Result = () => {
               variants={childVariants}
               className="text-xl text-gray-100"
             >
-              Its about {percentage > 100 ? `${Math.round(percentage/100)}x` : `${100-percentage}`} {percentage > 100 ? "higher" : "lower"} than average people in this world
+              Its about {percentage > 100 ? `${Math.round(percentage/100)}x` : `${100-percentage}%`} {percentage > 100 ? "higher" : "lower"} than average people in this world
             </motion.p>
             <motion.p
               variants={childVariants}
@@ -191,7 +191,8 @@ const Result = () => {
               <li>Use Bike Next Time Go To Work🚴</li>
               <li>Start Gardening🪴</li>
               <li>Avoid Plastic Usage🚫</li>
-              <li>Stop Smoking, Good For Your Health & Environment💪</li>
+              <li>Reduce shopping online📦</li>
+              {/* <li>Stop Smoking, Good For Your Health & Environment💪</li> */}
             </motion.div>
             <motion.div
               variants={buttonVariants}

@@ -16,6 +16,7 @@ import Food from "./pages/app/measure/Food";
 import Smoke from "./pages/app/measure/Smoke";
 import Holiday from "./pages/app/measure/Holiday";
 import Result from "./pages/app/measure/Result";
+import Achievement from "./pages/app/Achievement";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
               <Route path="measure/result" element={<Result />} />
               <Route path="fun-fact" element={<FunFact />} />
               <Route path="high-low" element={<HighLow />} />
+              <Route path="achievement" element={<Achievement />} />
             </Route>
           </Routes>
         </BrowserRouter>
