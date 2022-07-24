@@ -218,7 +218,7 @@ const Result = () => {
                   // className="!text-blue-600"
                   url={"https://youtube.com"}
                   quote={
-                    "My estimated carbon footprint today is 10Co2Kg, Lets calculate yours easily using KarbonMe"
+                    "My estimated carbon footprint today is 10Co2Kg, Lets calculate yours easily using CarbonBuddy"
                   }
                   hashtag="#saveearth"
                 >
@@ -242,7 +242,7 @@ const Result = () => {
                   url={"https://youtube.com"}
                   source={"https://youtube.com"}
                   title="My estimated carbon footprint today is 10Co2Kg"
-                  summary="My estimated carbon footprint today is 10Co2Kg - See yours with answering simple question in KarbonMe"
+                  summary="My estimated carbon footprint today is 10Co2Kg - See yours with answering simple question in CarbonBuddy"
                 >
                   <LinkedinIcon className="w-10 h-10 rounded-full" />
                 </LinkedinShareButton>
