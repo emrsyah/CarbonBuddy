@@ -4,7 +4,7 @@ import PageNavigation from "../../components/PageNavigation";
 import { Icon } from "@iconify/react";
 import dayjs from "dayjs";
 import Challenges from "../../components/Challenges";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   addDoc,
   collection,
@@ -30,6 +30,7 @@ function Tracker() {
   const [error, setError] = useState(false);
   const [firebaseChallenge, setFirebaseChallenge] = useState();
   const [status, setStatus] = useState("loading");
+  const navigate = useNavigate()
 
   const getFirebaseChallenges = () => {
     const unsubscribe = onSnapshot(
@@ -79,7 +80,7 @@ function Tracker() {
   };
 
   useEffect(() => {
-    if (!location.pathname.includes("/tracker")) navigate("/app/home");
+    if (!location.pathname.includes("/tracker")) navigate("/app/tracker");
     try {
       getChallenges();
       getFirebaseChallenges();
