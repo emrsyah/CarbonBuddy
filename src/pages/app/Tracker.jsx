@@ -24,13 +24,13 @@ function Tracker() {
 
   useEffect(() => {
     if (!location.pathname.includes("/tracker")) navigate("/app/home");
-    // getChallenges()
+    getChallenges()
   }, []);
 
   const getChallenges= async () => {
-    const id = Math.floor(Math.random() * 22) + 1;
+    const id = Math.floor(Math.random() * (25 - 4)) + 4;
     const res = await fetch(
-      "https://x8ki-letl-twmt.n7.xano.io/api:e4LWH0US/challenges/" + id
+      "https://x8ki-letl-twmt.n7.xano.io/api:IBNbZUaL/challenges/" + id
     );
     const json = await res.json();
     setChallenges({ ...json });
@@ -61,7 +61,7 @@ function Tracker() {
         {/* CHALLENGES GENERATOR */}
         <div className="pb-2 my-8 border-b-[1px] border-b-gray-700 flex items-center  justify-between">
           <h5 className="text-xl font-medium">
-            {challenges === "" ? "Generating Some Challenges..." : <>{challenges.title}</>}
+            {challenges === "" ? "Generating Some Challenges..." : <>{challenges.name}</>}
           </h5>
           <div className="flex items-center gap-3">
             <button 
