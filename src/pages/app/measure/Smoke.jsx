@@ -113,6 +113,7 @@ const Smoke = () => {
                 type="number"
                 ref={inputRef}
                 min={0}
+                required
                 className="border-[1px] outline-none px-4 text-center w-full py-[10px] border-gray-600 bg-gray-900 rounded"
               />
               <button
